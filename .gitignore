@@ -1,0 +1,5 @@
+node_modules 
+dist
+
+# Will be generated during dev anyway
+app.d.ts

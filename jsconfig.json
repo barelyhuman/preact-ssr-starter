@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "jsxImportSource": "preact",
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  }
+}
