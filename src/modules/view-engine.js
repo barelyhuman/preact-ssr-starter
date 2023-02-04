@@ -40,6 +40,12 @@ export default async function (app) {
         res.end();
       });
     }
+
+    if (modToImport.post) {
+      app.$router.post(route, async (req, res) => {
+        modToImport.post(req, res);
+      });
+    }
   };
 
   await pipe(pagePaths)
