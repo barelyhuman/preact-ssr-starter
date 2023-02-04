@@ -1,8 +1,9 @@
-import { app } from "./app";
+import { app } from './app'
 
 app.engine.loadModules().onReady(() => {
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3000
   app.listen(PORT, () => {
-    console.log(`up on ${PORT}`);
-  });
-});
+    // eslint-disable-next-line no-console
+    console.log(`up on ${PORT}`)
+  })
+})

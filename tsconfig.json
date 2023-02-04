@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    // "jsxFactory": "h",
     "allowJs": true,
-    // "checkJs": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
-    "module": "CommonJS",
-    "target": "ESNext",
-    // "jsxFragmentFactory": "Fragment",
+    "module": "commonjs",
+    "target": "esnext",
     "jsxImportSource": "preact",
     "esModuleInterop": true,
     "moduleResolution": "node",

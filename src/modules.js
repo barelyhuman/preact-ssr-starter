@@ -1,5 +1,6 @@
-import viewEngine from "./modules/view-engine";
+import viewEngine from './modules/view-engine'
+import staticAssets from './modules/static-assets'
 
-export default function (app) {
-  return [viewEngine].filter((x) => typeof x == "function");
+export default function () {
+  return [viewEngine, staticAssets].filter(x => typeof x == 'function')
 }
