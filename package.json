@@ -4,16 +4,20 @@
   "license": "MIT",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev src/server.js",
-    "build": "tsc"
+    "start": "node dist/index.js",
+    "gen:manifest": "node bin/generate-manifest.js",
+    "run:dev": "nodemon dist/index.js",
+    "dev": "NODE_ENV=development yarn webpack --watch",
+    "build": "yarn webpack"
   },
   "dependencies": {
     "@barelyhuman/pipe": "^0.1.1",
     "@barelyhuman/typeable": "^0.1.6",
     "body-parser": "^1.20.1",
     "express": "^4.18.2",
+    "file-loader": "^6.2.0",
     "goober": "^2.1.11",
+    "node-style-loader": "^0.0.1-alpha",
     "preact": "^10.11.3",
     "preact-render-to-string": "^5.2.6",
     "tiny-glob": "^0.2.9",
@@ -21,11 +25,18 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.1",
+    "@babel/core": "^7.20.12",
+    "@babel/plugin-transform-react-jsx": "^7.20.13",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
     "eslint": "^8.33.0",
+    "isomorphic-style-loader": "^5.3.2",
     "nodemon": "^2.0.20",
-    "ts-loader": "^9.4.2",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^4.9.5"
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-livereload-plugin": "^3.0.2",
+    "webpack-node-externals": "^3.0.0",
+    "webpack-shell-plugin-next": "^2.3.1"
   }
 }

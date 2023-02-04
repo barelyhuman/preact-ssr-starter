@@ -1,21 +1,16 @@
-import { join } from 'path'
 import { pipe } from '@barelyhuman/pipe'
 import { h } from 'preact'
 import preactRenderToString from 'preact-render-to-string'
-import glob from 'tiny-glob'
 
+/** @param {import("../../app").App} app */
 export default async function (app) {
-  const viewsDir = join(app.currentDir, 'views')
-
-  const pagePaths = await glob(`${viewsDir}/**/*.{js}`, {
-    filesOnly: true,
-  })
+  const x = await import('../manifest.gen.js')
+  const manifestPaths = x.paths
 
   const register = async (viewPath) => {
-    viewPath = viewPath.replace('src/views/', '')
+    const modToImport = manifestPaths[viewPath]
 
-    let modToImport = await import(`../views/${viewPath.replace('.js', '')}.js`)
-    modToImport = modToImport.default || modToImport
+    viewPath = viewPath.replace('src/views/', '')
 
     const params = viewPath.matchAll(/\[\w+\]/g)
     let route = viewPath
@@ -52,7 +47,7 @@ export default async function (app) {
     }
   }
 
-  await pipe(pagePaths)
+  await pipe(Object.keys(manifestPaths))
     .map(register)
     .to(x => Promise.all(x))
     .run()

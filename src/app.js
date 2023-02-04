@@ -22,6 +22,9 @@ const engine = new Engine({
   },
   options: {
     currentDir: __dirname,
+    env: {
+      NODE_ENV: process.env.NODE_ENV,
+    },
   },
 })
 
