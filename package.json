@@ -4,20 +4,19 @@
   "license": "MIT",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "gen:manifest": "node bin/generate-manifest.js",
-    "run:dev": "nodemon dist/index.js",
-    "dev": "NODE_ENV=development yarn webpack --watch",
-    "build": "yarn webpack"
+    "start": "node dist/server.js",
+    "dev": "nodemon dist/server.js",
+    "build": "yarn rollup -c",
+    "watch": "yarn rollup -c -w",
+    "fix": "npx prettier --write ."
   },
+  "prettier": "@barelyhuman/prettier-config",
   "dependencies": {
     "@barelyhuman/pipe": "^0.1.1",
-    "@barelyhuman/typeable": "^0.1.6",
+    "@barelyhuman/typeable": "^0.1.8",
     "body-parser": "^1.20.1",
-    "express": "^4.18.2",
-    "file-loader": "^6.2.0",
     "goober": "^2.1.11",
-    "node-style-loader": "^0.0.1-alpha",
+    "polka": "^0.5.2",
     "preact": "^10.11.3",
     "preact-render-to-string": "^5.2.6",
     "tiny-glob": "^0.2.9",
@@ -26,17 +25,17 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.1",
     "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
     "@babel/plugin-transform-react-jsx": "^7.20.13",
-    "babel-loader": "^9.1.2",
-    "css-loader": "^6.7.3",
+    "@barelyhuman/prettier-config": "^1.1.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-url": "^8.0.1",
     "eslint": "^8.33.0",
-    "isomorphic-style-loader": "^5.3.2",
     "nodemon": "^2.0.20",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-livereload-plugin": "^3.0.2",
-    "webpack-node-externals": "^3.0.0",
-    "webpack-shell-plugin-next": "^2.3.1"
+    "prettier": "^2.8.3",
+    "rollup": "^3.14.0",
+    "rollup-plugin-glob-import": "^0.5.0",
+    "rollup-plugin-node-externals": "^5.1.2",
+    "rollup-plugin-styles": "^4.0.0"
   }
 }

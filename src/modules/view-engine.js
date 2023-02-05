@@ -4,10 +4,10 @@ import preactRenderToString from 'preact-render-to-string'
 
 /** @param {import("../../app").App} app */
 export default async function (app) {
-  const x = await import('../manifest.gen.js')
-  const manifestPaths = x.paths
+  const manifest = await import('../manifest.gen.js')
+  const manifestPaths = manifest.paths
 
-  const register = async (viewPath) => {
+  const register = async viewPath => {
     const modToImport = manifestPaths[viewPath]
 
     viewPath = viewPath.replace('src/views/', '')
@@ -18,27 +18,26 @@ export default async function (app) {
     for (const i of params) {
       route = route.replace(
         i[0],
-        `:${i[0].replace(/^\[/, '').replace(/\]$/, '')}`,
+        `:${i[0].replace(/^\[/, '').replace(/\]$/, '')}`
       )
     }
 
     route = route.replace(/\.js$/, '')
     route = route.replace(/index$/, '')
 
-    if (modToImport.get) {
-      app.$router.get(`/${route}`, async (req, res) => {
-        const data = await modToImport.get(req, res)
-        res.setHeader('content-type', 'text/html')
-        res.write(preactRenderToString(h(modToImport.Page, { ...data })))
-        res.end()
-      })
-    }
+    app.$router.get(`/${route}`, async (req, res) => {
+      let data = {}
+      if (modToImport.get) data = await modToImport.get(req, res)
+
+      res.setHeader('content-type', 'text/html')
+      res.write(preactRenderToString(h(modToImport.Page, { ...data })))
+      res.end()
+    })
 
     if (modToImport.post) {
-      app.$router.post(route, async (req, res) => {
+      app.$router.post(`/${route}`, async (req, res) => {
         const data = await modToImport.post(req, res)
-        if (!data)
-          return
+        if (!data) return
 
         res.setHeader('content-type', 'text/html')
         res.write(preactRenderToString(h(modToImport.Page, { ...data })))

@@ -7,7 +7,7 @@ import { validationErrorToObj } from '../lib/error'
 export function Page({ errors }) {
   return (
     <BaseLayout>
-      <PageTitle subTitle={'Let\'s get you logged in'}>Login</PageTitle>
+      <PageTitle subTitle={"Let's get you logged in"}>Login</PageTitle>
       <form action="/" method="POST">
         <div>
           <label>Email</label>
@@ -54,8 +54,7 @@ export async function post(req, res) {
     })
     .catch(x => x)
 
-  if (errors instanceof Error)
-    return { errors: validationErrorToObj(errors) }
+  if (errors instanceof Error) return { errors: validationErrorToObj(errors) }
 
   res.redirect('/dashboard')
 }

@@ -12,8 +12,16 @@ export default function BaseLayout({ children }) {
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href={`${globalCSS}`} />
-          <link rel="stylesheet" href={`${picoCSS}`} />
+          <style
+            dangerouslySetInnerHTML={{
+              __html: picoCSS,
+            }}
+          ></style>
+          <style
+            dangerouslySetInnerHTML={{
+              __html: globalCSS,
+            }}
+          ></style>
           <style>{extractCss()}</style>
         </head>
         <body>

@@ -15,7 +15,7 @@ export default function Engine(appOptions) {
 
   Object.assign(app, appOptions.options || {})
 
-  this.beforeLoad = (listener) => {
+  this.beforeLoad = listener => {
     this.listeners[EVENTS.beforeLoad] = this.listeners[EVENTS.beforeLoad] || []
     const id = this.listeners.length
     this.listeners[EVENTS.beforeLoad].push({
@@ -25,7 +25,7 @@ export default function Engine(appOptions) {
 
     return () => {
       const onIndex = this.listeners[EVENTS.beforeLoad].findIndex(
-        x => x.id === id,
+        x => x.id === id
       )
       this.listeners[EVENTS.beforeLoad].splice(onIndex, 1)
     }
@@ -37,8 +37,7 @@ export default function Engine(appOptions) {
     const sequentialLoad = modules(app).reduce((acc, mod) => {
       return acc.then(async () => {
         const moduleLoaded = mod(this.app)
-        if (moduleLoaded instanceof Promise)
-          return await moduleLoaded
+        if (moduleLoaded instanceof Promise) return await moduleLoaded
 
         return moduleLoaded
       })
@@ -53,7 +52,7 @@ export default function Engine(appOptions) {
     return this
   }
 
-  this.onReady = (listener) => {
+  this.onReady = listener => {
     this.listeners[EVENTS.ready] = this.listeners[EVENTS.ready] || []
     const id = this.listeners.length
     this.listeners[EVENTS.ready].push({
@@ -69,10 +68,8 @@ export default function Engine(appOptions) {
 }
 
 function fireForEvent(eventName, message) {
-  if (!this.listeners[eventName])
-    return;
-
-  (this.listeners[eventName] || []).forEach((listenerObj) => {
+  if (!this.listeners[eventName]) return
+  ;(this.listeners[eventName] || []).forEach(listenerObj => {
     listenerObj.listener(message)
   })
 }

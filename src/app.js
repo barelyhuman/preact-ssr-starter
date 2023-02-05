@@ -1,23 +1,25 @@
 import { createTypeable } from '@barelyhuman/typeable'
-import express from 'express'
 import bodyParser from 'body-parser'
+
 import Engine from './engine/engine'
+import polka from './lib/polka'
 import modules from './modules'
 
-const expressApp = express()
-const router = new express.Router()
-const _app = createTypeable(expressApp, {
+const baseApp = {}
+
+const _app = createTypeable(baseApp, {
   rootInterfaceName: 'App',
   outfile: 'app.d.ts',
 })
 
-expressApp.use(bodyParser.urlencoded({ extended: true }))
-expressApp.use(bodyParser.json())
+polka.use(bodyParser.urlencoded({ extended: true }))
+polka.use(bodyParser.json())
 
 const engine = new Engine({
   modules,
   initializer() {
-    _app.$router = router
+    _app.server = polka
+    _app.$router = polka
     return _app
   },
   options: {
@@ -33,7 +35,3 @@ const engine = new Engine({
  */
 
 export const app = engine.app
-
-engine.onReady(() => {
-  app.use(router)
-})

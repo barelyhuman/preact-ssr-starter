@@ -20,14 +20,14 @@ const ListContainerItem = styled('li')`
 export default function ErrorContainer({ errors = {} }) {
   let _errors = []
 
-  Object.keys(errors).forEach((key) => {
+  Object.keys(errors).forEach(key => {
     _errors = _errors.concat(errors[key].errors).filter(x => x)
   })
 
   return (
     <Container>
       <ListContainer>
-        {_errors.map((error) => {
+        {_errors.map(error => {
           return <ListContainerItem>{error}</ListContainerItem>
         })}
       </ListContainer>
