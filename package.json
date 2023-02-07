@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "nodemon dist/server.js",
+    "dev": "NODE_ENV=development nodemon dist/server.js",
     "build": "yarn rollup -c",
     "watch": "yarn rollup -c -w",
     "fix": "npx prettier --write ."
